@@ -1,0 +1,133 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding: 0;
+  align-items: center;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid black;
+  padding: 40px;
+  margin-top: 15%;
+  border-radius: 5px;
+}
+
+.header {
+  font-family: 'Bebas Neue', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  color: red;
+}
+
+.mybutton {
+  background: red;
+  color: white;
+  display: inline-block;
+  border: none;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px 20px;
+  margin-right: 25px;
+  outline: none;
+  border-radius: 10px;
+}
+
+.mybutton:focus {
+  outline: none;
+}
+
+.mybutton-block {
+  width: 100%;
+  display: block;
+}
+
+
+.signin {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.signin-control {
+  color:black;
+  margin: 25px;
+}
+
+.signin-control label {
+  display: block;
+}
+
+.signin-control input{
+  width: 100%;
+  height: 40px;
+  margin: 5px;
+  padding: 10px;
+  font-size: 17px;
+}
+
+.signin-control-check{
+  display: flex;
+  margin-top: -20px;
+  margin-left:30px;
+  margin-right:250px;
+  font-size: 15px;
+}
+
+.signin-control-check label{
+  align-items: left;
+  margin-left:0;
+}
+
+.signin-control-check input {
+  flex: 100;
+  height: 20px;
+}
+
+.signup{
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.signup-control {
+  color:black;
+  margin: 25px;
+}
+
+.signup-control label {
+  display: block;
+}
+
+.signup-control input{
+  width: 100%;
+  height: 40px;
+  margin: 5px;
+  padding: 3px 7px;
+  font-size: 17px;
+}
+
+.signup-control-check{
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+
+
+footer {
+  margin-top:40px;
+  text-align: center;
+  font-size:10px;
+}
