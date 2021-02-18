@@ -1,44 +1,4 @@
 {
   "users": [
-    {
-      "email": "123123",
-      "phone_number": "",
-      "password": ""
-    },
-    {
-      "email": "email@me",
-      "phone_number": "123123",
-      "password": "123123"
-    },
-    {
-      "email": "20b5qVp",
-      "phone_number": "",
-      "password": ""
-    },
-    {
-      "email": "email@e",
-      "phone_number": "123",
-      "password": "123"
-    },
-    {
-      "email": "123123@123",
-      "phone_number": "123123",
-      "password": "123132"
-    },
-    {
-      "email": "123@123",
-      "phone_number": "123",
-      "password": "123"
-    },
-    {
-      "email": "email@gmail.com",
-      "phone_number": "123",
-      "password": "123123"
-    },
-    {
-      "email": "-35iBg0",
-      "phone_number": "",
-      "password": ""
-    }
   ]
 }

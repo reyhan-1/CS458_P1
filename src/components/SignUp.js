@@ -1,6 +1,7 @@
 import React, { useState, Component } from 'react'
 
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+
 import axios from 'axios'
 
 
@@ -15,7 +16,8 @@ export default class SignUp extends Component {
     email: "",
     phone_number: "",
     password: "",
-    errors: ""
+    errors: "",
+    redirect_succ: false
   };
 
   constructor() {
@@ -38,9 +40,9 @@ export default class SignUp extends Component {
     try {
       let data = { email: this.state.email, phone_number: this.state.phone_number, password: this.state.password }
       let res = await api.post('/', data);
+      this.setState({redirect_succ: true})
 
     } catch (err) {
-      
       this.setState ({ errors: "This email is already in use." }) ;
     }
 
@@ -49,6 +51,9 @@ export default class SignUp extends Component {
 
   render() {
 
+    if (this.state.redirect_succ === true) {
+      return <Redirect to={'/signin'} />
+    }
     return (
 
       <form className='signup' onSubmit={this.onSubmit}>
@@ -74,7 +79,7 @@ export default class SignUp extends Component {
             onChange={this.changePassword}
           />
         </div>
-        <input type='submit' value='Get Started >' className='mybutton mybutton-block' />
+        <input type='submit' value='Register' className='mybutton mybutton-block' />
       </form>
     )
   }

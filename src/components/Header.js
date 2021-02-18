@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className='header'>
       <h1>Netflix</h1>
-      {location.pathname === '/signup' && (
+      {(location.pathname === '/signup' || location.pathname === '/') && (
         <Link to="/signin">
           <Button 
             color={'red'}
