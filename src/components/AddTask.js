@@ -1,55 +1,72 @@
-import { useState } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Header from './Header'
+import Footer from './Footer'
+import axios from 'axios'
 
-const SignIn = ({ onSignIn }) => {
-  const [text, setText] = useState('')
-  const [pass, setPass] = useState('')
-  const [rememberMe, setRemember] = useState(false)
 
-  const onSubmit = (e) => {
-    e.preventDefault()
 
-    if(!pass){
-      alert('invalid password')
-    }
+const api = axios.create({
+  baseURL: 'http://localhost:5000/users'
+})
 
-    onSignIn({ text, pass, rememberMe })
-    setText('')
-    setPass('')
-    setRemember(false)
+export default class SignIn extends Component {
+
+  state = {
+    email: "",
+    password: "",
+    rememBerMe: false
   }
 
-  return (
-    <form className='signin' onSubmit={onSubmit}>
-      <div className='signin-control'>
-        <input
-          type='text'
-          placeholder='Email or phone number'
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-      </div>
-      <div className='signin-control'>
-        <input
-          type='text'
-          placeholder='Password'
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-        />
-      </div>
-      <div className='signin-control signin-control-check'>
-        <label>remember me</label>
-        <input
-          type='checkbox'
-          checked={rememberMe}
-          value={rememberMe}
-          onChange={(e) => setRemember(e.currentTarget.checked)}
-        />
-      </div>
+  getUser = async (x) => {
+    let data = await api.get('?q=' + x ).then(resp => {
+      data = resp.data;
 
-      <input type='submit' value='Sign In' className='mybutton mybutton-block' />
-    </form>
-  )
+    });
+  }
+
+
+  onSubmit = (e) => {
+    e.preventDefault()
+  }
+
+  changeEmail = event => { event.preventDefault(); this.setState({ email: event.target.value })}
+  changePassword = event => { event.preventDefault(); this.setState({ password: event.target.value })}
+  changeRememberMe = e => {e.preventDefault(); this.setState({rememBerMe: e.target.value})}
+  render() {
+
+    return (
+
+
+        <form className='signin' onSubmit={this.onSubmit}>
+          <div className='signin-control'>
+            <input
+              type='text'
+              placeholder='Email or phone number'
+              onChange={this.changeEmail}
+            />
+          </div>
+          <div className='signin-control'>
+            <input
+              type='text'
+              placeholder='Password'
+              onChange={this.changePassword}
+            />
+          </div>
+          <div className='signin-control signin-control-check'>
+            <label>Remember me</label>
+            <input
+              type='checkbox'
+              onChange={this.changeRememberMe}
+            />
+          </div>
+
+          <input type='submit' value='Sign In' className='mybutton mybutton-block' />
+        </form>
+
+
+
+    )
+
+  }
 }
-
-export default SignIn

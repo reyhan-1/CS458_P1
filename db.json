@@ -1,16 +1,39 @@
 {
-  "tasks": [
+  "users": [
     {
-      "id": 1,
-      "text": "Doctors Appointment",
-      "day": "Feb 5th at 2:30pm",
-      "reminder": true
+      "email": "123123",
+      "phone_number": "",
+      "password": ""
     },
     {
-      "id": 2,
-      "text": "Meeting at School",
-      "day": "Feb 6th at 1:30pm",
-      "reminder": true
+      "email": "email@me",
+      "phone_number": "123123",
+      "password": "123123"
+    },
+    {
+      "email": "20b5qVp",
+      "phone_number": "",
+      "password": ""
+    },
+    {
+      "email": "email@e",
+      "phone_number": "123",
+      "password": "123"
+    },
+    {
+      "email": "123123@123",
+      "phone_number": "123123",
+      "password": "123132"
+    },
+    {
+      "email": "123@123",
+      "phone_number": "123",
+      "password": "123"
+    },
+    {
+      "email": "email@gmail.com",
+      "phone_number": "123",
+      "password": "123123"
     }
   ]
 }
