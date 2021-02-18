@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import AddTask from './components/AddTask'
+import SignIn from './components/SignIn'
 import About from './components/About'
 import SignUp from './components/SignUp'
 
@@ -10,7 +10,7 @@ const App = () => {
   const [showSignIn, setshowSignIn] = useState(false)
 
   // sign in
-  const SignIn = async (task) => {
+  const signInHandler = async (task) => {
     const res = await fetch('http://localhost:5000/tasks', {
       method: 'POST',
       headers: {
@@ -25,25 +25,22 @@ const App = () => {
   return (
     <Router>
       <div className='container'>
-        <Header
-          onAdd={() => setshowSignIn(!showSignIn)}
-          showSignIn={showSignIn}
-        />
-
-
+        <Header />
         <Route
           path='/'
           exact
-          render={(props) => (
-            <>
-              {showSignIn && <AddTask onSignIn={SignIn} />}
-              
-            </>
-          )}
+          component={SignIn}
         />
-
-        <SignUp/>
-        
+        <Route
+          path='/signin'
+          exact
+          component={SignIn}
+        />
+        <Route
+          path='/signup'
+          exact
+          component={SignUp}
+        />
         <Route path='/about' component={About} />
         <Footer />
       </div>

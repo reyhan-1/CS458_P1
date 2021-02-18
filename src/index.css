@@ -24,6 +24,10 @@ body {
   border-radius: 5px;
 }
 
+.container-block {
+  padding: 35px;
+}
+
 .header {
   font-family: 'Bebas Neue', sans-serif;
   display: flex;
@@ -53,17 +57,16 @@ body {
 .mybutton-block {
   width: 100%;
   display: block;
+  margin-top: 20px;
 }
 
-
 .signin {
-  margin-bottom: 40px;
   text-align: left;
+  margin-bottom: 12px;
 }
 
 .signin-control {
   color:black;
-  margin: 25px;
 }
 
 .signin-control label {
@@ -80,9 +83,9 @@ body {
 
 .signin-control-check{
   display: flex;
-  margin-top: -20px;
-  margin-left:30px;
-  margin-right:250px;
+  margin-top: 10px;
+  margin-left: 7px;
+  margin-right: 140px;
   font-size: 15px;
 }
 
@@ -124,10 +127,12 @@ body {
   font-size: 15px;
 }
 
-
-
 footer {
   margin-top:40px;
   text-align: center;
   font-size:10px;
+}
+
+.form-footer {
+  margin-top: 25px;
 }
