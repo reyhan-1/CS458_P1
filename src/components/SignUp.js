@@ -40,6 +40,7 @@ export default class SignUp extends Component {
       let res = await api.post('/', data);
 
     } catch (err) {
+      
       this.setState ({ errors: "This email is already in use." }) ;
     }
 
