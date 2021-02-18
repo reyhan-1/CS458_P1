@@ -10,7 +10,7 @@ const About = () => {
       <div className="about">
         <p>Reyhan Uyanik</p>
         <p>Aziz Utku Kagitci</p>
-        <p>Osman Burak Intisah</p>
+        <p>Osman Burak Intisah </p>
         <p>Aysegul Gokce</p>
       </div>
 
