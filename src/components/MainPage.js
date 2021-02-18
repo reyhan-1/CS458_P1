@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link, Redirect } from 'react-router-dom'
+
 
 const api = axios.create({
     baseURL: 'http://localhost:5000/users'
@@ -7,7 +9,7 @@ const api = axios.create({
 
 export default class MainPage extends Component {
     state = {
-        userData : {}
+        userData: {}
     }
     componentDidMount() {
         const { match: { params } } = this.props;
@@ -18,7 +20,7 @@ export default class MainPage extends Component {
     getUserData = async (email) => {
         try {
             await api.get('?email=' + email).then(resp =>
-            this.setState({userData: resp.data[0]}))
+                this.setState({ userData: resp.data[0] }))
         } catch (err) {
             console.log(err);
         }
@@ -35,6 +37,11 @@ export default class MainPage extends Component {
                 <br />
                 <div>
                     <span className="form-footer">Phone Number: {this.state.userData.phone_number}</span>
+                </div>
+                <div>
+                    <Link to="/signup">
+                        <button className='topMarginLogoutButton'> Log out</button>
+                    </Link>
                 </div>
             </div>
         )

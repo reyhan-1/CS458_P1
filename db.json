@@ -1,4 +1,9 @@
 {
   "users": [
+    {
+      "email": "signup@gmail.com",
+      "phone_number": "5066033030",
+      "password": "123123"
+    }
   ]
 }

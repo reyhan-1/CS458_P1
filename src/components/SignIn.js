@@ -18,7 +18,7 @@ export default class SignIn extends Component {
     signInStatus: -1,
     forgotPasswordEnable: false
   }
-  
+
   getUser = async (email, pass) => {
     try {
       await api.get('?email=' + email + '&password=' + pass).then(resp => this.setState({ userInfo: resp.data }));
@@ -32,7 +32,9 @@ export default class SignIn extends Component {
             this.setState({ forgotPasswordEnable: true })
           }
           else {
-            this.setState({ signInStatus: 500 })
+            if (this.state.email.length != 0) {
+                this.setState({ signInStatus: 500 })
+            }
           }
         }
         else {
@@ -56,14 +58,14 @@ export default class SignIn extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.setState({signInStatus: -1,forgotPasswordEnable:false })
+    this.setState({ signInStatus: -1, forgotPasswordEnable: false })
+    // here we can check whether we have correct type of input (email or phone no)
     this.getUser(this.state.email, this.state.password);
   }
 
   changeEmail = event => { event.preventDefault(); this.setState({ email: event.target.value }) }
   changePassword = event => { event.preventDefault(); this.setState({ password: event.target.value }) }
   changeRememberMe = e => { this.setState({ rememBerMe: e.target.value }) }
-  
   render() {
 
     if (this.state.signInStatus === 200) {
@@ -76,14 +78,16 @@ export default class SignIn extends Component {
       <div className="container-block">
         <h1>Sign In</h1>
         <br />
-        {this.state.forgotPasswordEnable && <div  className="info-box">
+        {this.state.forgotPasswordEnable && <div className="info-box">
           <span>Incorrect password. Please try again or you can
           <Link to={'/resetpassword/' + this.state.email}> reset your password.</Link>
           </span>
-        </div> }
-        
-        {this.state.signInStatus === 500 && 
-        <span>Sorry, we can't find an account with this email address. Please try again or <Link to='/signup'>create a new account.</Link></span>}
+        </div>}
+        {this.state.signInStatus === 500 &&
+          <div className="info-box">
+            <span>Sorry, we can't find an account with this email address. Please try again or <Link to='/signup'>create a new account.</Link></span>
+          </div>
+        }
         <form className='signin' onSubmit={this.onSubmit}>
           <div className='signin-control'>
             <input
