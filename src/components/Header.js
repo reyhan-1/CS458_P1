@@ -1,21 +1,21 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import Button from './Button'
 
-const Header = ({ onAdd, showAdd }) => {
-  const location = useLocation()
-
+const Header = () => {
+  const location = useLocation();
   return (
     <header className='header'>
       <h1>Netflix</h1>
-      {location.pathname === '/' && (
-        <Button 
-          color={'red'}
-          text={showAdd ? 'Go Back'  : 'Sign In'}
-          onClick={onAdd}
-        />
-      )}
+      {location.pathname === '/signup' && (
+        <Link to="/signin">
+          <Button 
+            color={'red'}
+            text={'Sign In'}
+          />
+        </Link>
+    )}
     </header>
-  )
+  );
 }
 
 
