@@ -12,7 +12,7 @@ export default class ResetPassword extends Component {
         userData: {},
         newPassword: "",
         confirmPassword: "",
-        error: "",
+        match_error: "",
         resetCompleted: false
     }
     componentDidMount() {
@@ -22,10 +22,8 @@ export default class ResetPassword extends Component {
     }
 
     getUserData = async (email) => {
-        console.log("HELOL")
         try {
-            await api.get('?email=' + email).then(resp =>
-                this.setState({ userData: resp.data[0] }))
+            await api.get('?email=' + email).then(resp => this.setState({ userData: resp.data[0] }))
         } catch (err) {
             console.log(err);
         }
@@ -51,7 +49,7 @@ export default class ResetPassword extends Component {
 
             }
             else {
-                this.setState({ error: "Passwords does not match" })
+                this.setState({ match_error: "Passwords does not match", passwordError: "" })
             }
 
 
@@ -67,15 +65,31 @@ export default class ResetPassword extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+
+        const { newPassword } = this.state;
+
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+
+        if (!passwordPattern.test(newPassword)) {
+            this.setState({
+                passwordError: "Your password must contain at least one numeric digit, one uppercase and one lowercase letter with minimum length 8.",
+                match_error: "",
+            });
+            return;
+        }
+
         this.updateUserData(this.state.email, this.state.password);
     }
 
     render() {
+        const { match_error, passwordError } = this.state;
 
         if (this.state.resetCompleted) {
             return <Redirect to={`/signin`} />
         }
+        
         return (
+            
 
             <div className="container-block">
                 <form className="sign-in" onSubmit={this.onSubmit}>
@@ -90,7 +104,8 @@ export default class ResetPassword extends Component {
                         <input type='password' placeholder='Password Confirmation' onChange={this.changeConfirmPassword} />
                     </div >
                     <div>
-                        {this.state.error && <span style={{ color: "red" }}>{this.state.error}</span>}
+                        {passwordError && <span id="password-error" style={{ color: "red" }}>{passwordError}</span>}
+                        {match_error && <span id="match_error" style={{ color: "red" }}>{match_error}</span>}
                     </div>
                     <div>
 

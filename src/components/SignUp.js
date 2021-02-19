@@ -94,35 +94,32 @@ export default class SignUp extends Component {
   }
 
   render() {
-    const { emailError, phoneNumberError, passwordError, formError } = this.state;
+    const { emailError, phoneNumberError, passwordError, formError, email } = this.state;
 
     if (localStorage.getItem('email')) {
       return <Redirect to={`/dashboard/` + localStorage.getItem('email')} />
     }
     
     if (this.state.redirect_succ === true) {
-      return <Redirect to={'/signin'} />
+      return <Redirect to={'/dashboard/' + email} />
     }
+    
     return (
 
       <form className='signup' onSubmit={this.onSubmit}>
         <div className='signup-control'>
+          
           <input type='text' placeholder='Email address' onChange={this.changeEmail} />
           {emailError && <span id="email-error" style={{ color: "red" }}>{emailError}</span>}
-          <input
-            type='text'
-            placeholder='Phone Number'
-            value={this.state.phone_number}
-            onChange={this.changePhoneNumber}
-          />
+          
+          <input type='text' placeholder='Phone Number' value={this.state.phone_number} onChange={this.changePhoneNumber} />
           {phoneNumberError && <span id="phone-error" style={{ color: "red" }}>{phoneNumberError}</span>}
-          <input type="password"
-            id="password"
-            placeholder="Password"
-            onChange={this.changePassword}
-          />
+          
+          <input type="password" id="password" placeholder="Password" onChange={this.changePassword} />
           {passwordError && <span id="password-error" style={{ color: "red" }}>{passwordError}</span>}
+          
           <input type='submit' value='Register' className='mybutton mybutton-block' />
+         
           {formError && <span id="form-error" style={{ color: "red" }}>{formError}</span>}
         </div>
       </form>
