@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect, History } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 
@@ -13,7 +13,7 @@ export default class SignIn extends Component {
     userInfo: 0,
     email: "",
     password: "",
-    rememBerMe: false,
+    rememberMe: false,
     signInStatus: -1,
     forgotPasswordEnable: false
   }
@@ -26,12 +26,12 @@ export default class SignIn extends Component {
 
         if (this.state.userInfo.length === 0) {
           await api.get('?email=' + email).then(resp => this.setState({ userInfo: resp.data }))
-          if (this.state.userInfo.length != 0) {
+          if (this.state.userInfo.length !== 0) {
             // only correct email
             this.setState({ forgotPasswordEnable: true })
           }
           else {
-            if (this.state.email.length != 0) {
+            if (this.state.email.length !== 0) {
                 this.setState({ signInStatus: 500 })
             }
           }
@@ -39,7 +39,6 @@ export default class SignIn extends Component {
         else {
           // correct credentials with phone number
           this.setState({ signInStatus: 200 })
-
         }
       }
       else {
@@ -58,21 +57,29 @@ export default class SignIn extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.setState({ signInStatus: -1, forgotPasswordEnable: false })
+    const { email, password} = this.state;
+    if (!email || !password) {
+      this.setState({ 
+        showFormError: true,
+      });
+      return;
+    }
+
     // here we can check whether we have correct type of input (email or phone no)
     this.getUser(this.state.email, this.state.password);
   }
 
   changeEmail = event => { event.preventDefault(); this.setState({ email: event.target.value }) }
   changePassword = event => { event.preventDefault(); this.setState({ password: event.target.value }) }
-  changeRememberMe = e => { this.setState({ rememBerMe: e.target.value }) }
+  changeRememberMe = e => { this.setState({ rememberMe: e.target.value }) }
   render() {
     if (localStorage.getItem('email')) {
       return <Redirect to={`/dashboard/` + localStorage.getItem('email')} />
     }
 
     if (this.state.signInStatus === 200) {
-      const { rememBerMe } = this.state;
-      if (rememBerMe) {
+      const { rememberMe } = this.state;
+      if (rememberMe) {
         localStorage.setItem('email', this.state.userInfo[0].email);
       }
       
@@ -85,19 +92,25 @@ export default class SignIn extends Component {
       <div className="container-block">
         <h1>Sign In</h1>
         <br />
-        {this.state.forgotPasswordEnable && <div className="info-box">
+        {this.state.forgotPasswordEnable && <div id="warning" className="info-box">
           <span>Incorrect password. Please try again or you can
           <Link to={'/resetpassword/' + this.state.email}> reset your password.</Link>
           </span>
         </div>}
         {this.state.signInStatus === 500 &&
-          <div className="info-box">
+          <div id="warning" className="info-box">
             <span>Sorry, we can't find an account with this email address. Please try again or <Link to='/signup'>create a new account.</Link></span>
+          </div>
+        }
+        {(this.state.signInStatus !== 500 && this.state.showFormError) &&
+          <div id="warning" className="info-box">
+            <span>Sorry, please fill in all of the fields.</span>
           </div>
         }
         <form className='signin' onSubmit={this.onSubmit}>
           <div className='signin-control'>
             <input
+              id='email'
               type='text'
               placeholder='Email or phone number'
               onChange={this.changeEmail}
@@ -105,6 +118,7 @@ export default class SignIn extends Component {
           </div>
           <div className='signin-control'>
             <input
+              id='password'
               type='password'
               placeholder='Password'
               onChange={this.changePassword}
@@ -113,9 +127,10 @@ export default class SignIn extends Component {
           <div className='signin-control signin-control-check'>
             <label>Remember me</label>
             <input
+              id='rememberMe'
               type='checkbox'
               onChange={this.changeRememberMe}
-              value={this.state.rememBerMe}
+              value={this.state.rememberMe}
             />
           </div>
 

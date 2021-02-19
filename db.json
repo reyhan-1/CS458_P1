@@ -4,6 +4,11 @@
       "email": "signup@gmail.com",
       "phone_number": "5066033030",
       "password": "123123"
+    },
+    {
+      "email": "user@test.com",
+      "phone_number": "05055551234",
+      "password": "12345678qQ"
     }
   ]
 }
