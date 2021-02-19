@@ -39,8 +39,8 @@ export default class MainPage extends Component {
                     <span className="form-footer">Phone Number: {this.state.userData.phone_number}</span>
                 </div>
                 <div>
-                    <Link to="/signup">
-                        <button className='topMarginLogoutButton'> Log out</button>
+                    <Link to="/">
+                        <button onClick={() => {localStorage.clear('email')}} className='topMarginLogoutButton'> Log out</button>
                     </Link>
                 </div>
             </div>

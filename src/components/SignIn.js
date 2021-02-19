@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, History } from 'react-router-dom'
 import axios from 'axios'
 
 
@@ -9,7 +9,6 @@ const api = axios.create({
 })
 
 export default class SignIn extends Component {
-
   state = {
     userInfo: 0,
     email: "",
@@ -67,8 +66,16 @@ export default class SignIn extends Component {
   changePassword = event => { event.preventDefault(); this.setState({ password: event.target.value }) }
   changeRememberMe = e => { this.setState({ rememBerMe: e.target.value }) }
   render() {
+    if (localStorage.getItem('email')) {
+      return <Redirect to={`/dashboard/` + localStorage.getItem('email')} />
+    }
 
     if (this.state.signInStatus === 200) {
+      const { rememBerMe } = this.state;
+      if (rememBerMe) {
+        localStorage.setItem('email', this.state.userInfo[0].email);
+      }
+      
       return <Redirect to={`/dashboard/` + this.state.userInfo[0].email} />
     }
 
