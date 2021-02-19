@@ -98,11 +98,11 @@ export default class ResetPassword extends Component {
                     </div>
                     <br />
                     <div className='signin-control'>
-                        <input type='password' placeholder='Password' onChange={this.changePassword} />
-                    </div >
+                        <input id='password' type='password' placeholder='Password' onChange={this.changePassword} />
+                    </div>
                     <div className='signin-control'>
-                        <input type='password' placeholder='Password Confirmation' onChange={this.changeConfirmPassword} />
-                    </div >
+                        <input id='password-confirmation' type='password' placeholder='Password Confirmation' onChange={this.changeConfirmPassword} />
+                    </div>
                     <div>
                         {passwordError && <span id="password-error" style={{ color: "red" }}>{passwordError}</span>}
                         {match_error && <span id="match_error" style={{ color: "red" }}>{match_error}</span>}
